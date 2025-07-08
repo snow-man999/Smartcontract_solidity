@@ -155,5 +155,9 @@ env:
 
 # FAQ
     1. What is the Smartcontract?
+        A smart contract is a self-executing program stored on a blockchain.
+        It automatically enforces rules or agreements without the need for a central authority.
     2. What is the solidity?
+        Solidity is a programming language specifically designed to write smart contracts on the Ethereum blockchain.
     3. What is the connections between smartcontract and solidity?
+        Solidity is the main language used to write smart contracts on Ethereum and other EVM-compatible blockchains (like BNB Chain, Polygon, etc.).
