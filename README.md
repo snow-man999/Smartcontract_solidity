@@ -153,4 +153,7 @@ env:
 ``` -->
 
 
-<!-- ## FAQ -->
+# FAQ
+    1. What is the Smartcontract?
+    2. What is the solidity?
+    3. What is the connections between smartcontract and solidity?
