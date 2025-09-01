@@ -161,3 +161,4 @@ env:
         Solidity is a programming language specifically designed to write smart contracts on the Ethereum blockchain.
     3. What is the connections between smartcontract and solidity?
         Solidity is the main language used to write smart contracts on Ethereum and other EVM-compatible blockchains (like BNB Chain, Polygon, etc.).
+    4. If you have any question with this project, feel free to reach out.
