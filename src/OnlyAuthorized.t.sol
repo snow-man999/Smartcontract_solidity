@@ -1,11 +1,9 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.20;
 
 import "forge-std/Test.sol";
-
-import "./test/utils/Caller.sol";
-
-import {OnlyAuthorized} from "./OnlyAuthorized.sol";
+import "./utils/Caller.sol";
+import {OnlyAuthorized} from "../src/OnlyAuthorized.sol";
 
 contract OnlyAuthorizedTest is Test {
     OnlyAuthorized private oa;
@@ -14,22 +12,30 @@ contract OnlyAuthorizedTest is Test {
         oa = new OnlyAuthorized();
     }
 
-    function testCanChangeOwner() public {
-        oa.changeOwner(address(0x1));
-        assertEq(oa.owner(), address(0x1));
+    function testOwnerCanChangeOwner() public {
+        address newOwner = address(0x1);
+
+        oa.changeOwner(newOwner);
+
+        assertEq(oa.owner(), newOwner);
     }
 
-    function testOtherUsersCannotChangeOwner() public {
+    function testNonOwnerCannotChangeOwner() public {
         Caller user = new Caller();
 
         (bool ok, ) = user.externalCall(
             address(oa),
             abi.encodeWithSelector(
-                oa.changeOwner.selector,
-                (address(0xdeadbeef))
+                OnlyAuthorized.changeOwner.selector,
+                address(0xdeadbeef)
             )
         );
 
-        assertTrue(!ok, "Only the owner can change owner");
+        assertFalse(ok);
+    }
+
+    function testRevertOnZeroAddress() public {
+        vm.expectRevert(OnlyAuthorized.ZeroAddress.selector);
+        oa.changeOwner(address(0));
     }
 }
